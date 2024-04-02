@@ -44,6 +44,8 @@ class ViewController: UIViewController {
         cartButton.setTitleColor(.systemBlue, for: .normal)
         
         
+        
+        
         let bottom: UIView = .init()
         bottom.backgroundColor = .yellow
 
@@ -60,7 +62,6 @@ class ViewController: UIViewController {
         self.view.addSubview(bottom)
         self.view.addSubview(cancelButton)
         self.view.addSubview(cartButton)
-        
         
         
         top.translatesAutoresizingMaskIntoConstraints = false
@@ -80,55 +81,53 @@ class ViewController: UIViewController {
         
         cheezeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cheezeLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 220),
+            cheezeLabel.topAnchor.constraint(equalTo: breadLabel.bottomAnchor, constant: 50),
             cheezeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
         
         toastLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            toastLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 290),
+            toastLabel.topAnchor.constraint(equalTo: cheezeLabel.bottomAnchor, constant: 50),
             toastLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
         vegiLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            vegiLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 360),
+            vegiLabel.topAnchor.constraint(equalTo: toastLabel.bottomAnchor, constant: 50),
             vegiLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
      ])
         sauceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sauceLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 430),
+            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 50),
             sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
         chooseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 480),
+            chooseLabel.topAnchor.constraint(equalTo: sauceLabel.bottomAnchor, constant: 30),
             chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
         _15cm.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _15cm.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -285),
-            _15cm.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 220),
-            _15cm.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -110)
+            _15cm.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -20),
+            _15cm.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 0),
+            _15cm.trailingAnchor.constraint(equalTo: _30cm.leadingAnchor, constant: -30)
         ])
         _30cm.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _30cm.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -285),
-            _30cm.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 300),
+            _30cm.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -20),
+            _30cm.leadingAnchor.constraint(equalTo: _15cm.trailingAnchor, constant: 0),
             _30cm.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
         ])
         
         cancelButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cancelButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -230),
-            cancelButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            cancelButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -200)
+            cancelButton.bottomAnchor.constraint(equalTo: bottom.topAnchor, constant: -10),
+            cancelButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
         
         cartButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cartButton.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -230),
-            cartButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 200),
-            cartButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -10)
+            cartButton.bottomAnchor.constraint(equalTo: bottom.topAnchor, constant: -10),
+            cartButton.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 130)
         ])
         
         bottom.translatesAutoresizingMaskIntoConstraints = false
@@ -139,8 +138,7 @@ class ViewController: UIViewController {
             bottom.heightAnchor.constraint(equalToConstant: 188)
         ])
     }
-
-
+    
 }
 
 
