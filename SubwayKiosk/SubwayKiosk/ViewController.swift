@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let breadList: [String] = ["플랫브레드", "허니오트", "하티", "파마산오레가노", "화이트", "위트"]
-    let cheezeList: [String] = ["슈레드", "아메리칸", "모짜렐라"]
+    let cheezeList: [String] = ["슈레드치즈", "아메리칸치즈", "모짜렐라치즈"]
     
     let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowlayout = UICollectionViewFlowLayout()
@@ -73,6 +73,14 @@ class ViewController: UIViewController {
         _30cm.setTitle("30cm", for: .normal)
         _30cm.setTitleColor(.systemBlue, for: .normal)
         
+        let Obutton: UIButton = .init(frame: .init())
+        Obutton.setTitle("O", for: .normal)
+        Obutton.setTitleColor(.systemBlue, for: .normal)
+        
+        let Xbutton: UIButton = .init(frame: .init())
+        Xbutton.setTitle("X", for: .normal)
+        Xbutton.setTitleColor(.systemBlue, for: .normal)
+        
         let cancelButton: UIButton = .init(frame: .init())
         cancelButton.setTitle("취소하기", for: .normal)
         cancelButton.setTitleColor(.systemBlue, for: .normal)
@@ -97,6 +105,8 @@ class ViewController: UIViewController {
         self.view.addSubview(bottom)
         self.view.addSubview(cancelButton)
         self.view.addSubview(cartButton)
+        self.view.addSubview(Obutton)
+        self.view.addSubview(Xbutton)
         self.view.addSubview(breadHorizontalBar)
         self.view.addSubview(cheezeHorizontalBar)
         
@@ -107,7 +117,7 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             breadHorizontalBar.topAnchor.constraint(equalTo: top.bottomAnchor, constant: 14),
             breadHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
-            breadHorizontalBar.leadingAnchor.constraint(equalTo: breadLabel.trailingAnchor, constant: 50),
+            breadHorizontalBar.leadingAnchor.constraint(equalTo: breadLabel.trailingAnchor, constant: 70),
             breadHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
@@ -149,6 +159,19 @@ class ViewController: UIViewController {
             toastLabel.topAnchor.constraint(equalTo: cheezeLabel.bottomAnchor, constant: 40),
             toastLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
+        
+        Xbutton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            Xbutton.topAnchor.constraint(equalTo: cheezeHorizontalBar.bottomAnchor, constant: 30),
+            Xbutton.leadingAnchor.constraint(equalTo: Obutton.trailingAnchor, constant: 40)
+        ])
+        
+        Obutton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            Obutton.topAnchor.constraint(equalTo: cheezeHorizontalBar.bottomAnchor, constant: 30),
+            Obutton.leadingAnchor.constraint(equalTo: toastLabel.trailingAnchor, constant: 120)
+        ])
+        
         vegiLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             vegiLabel.topAnchor.constraint(equalTo: toastLabel.bottomAnchor, constant: 40),
@@ -167,7 +190,7 @@ class ViewController: UIViewController {
         _15cm.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             _15cm.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -20),
-            _15cm.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 0),
+            _15cm.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 30),
             _15cm.trailingAnchor.constraint(equalTo: _30cm.leadingAnchor, constant: -30)
         ])
         _30cm.translatesAutoresizingMaskIntoConstraints = false
