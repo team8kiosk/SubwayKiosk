@@ -222,19 +222,19 @@ class ViewController: UIViewController {
         breadLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             breadLabel.topAnchor.constraint(equalTo: top.bottomAnchor, constant: 25),
-            breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
+            breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         
         cheezeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cheezeLabel.topAnchor.constraint(equalTo: breadLabel.bottomAnchor, constant: 40),
-            cheezeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
+            cheezeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         
         toastLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             toastLabel.topAnchor.constraint(equalTo: cheezeLabel.bottomAnchor, constant: 40),
-            toastLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
+            toastLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         OXStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -246,17 +246,17 @@ class ViewController: UIViewController {
         vegiLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             vegiLabel.topAnchor.constraint(equalTo: toastLabel.bottomAnchor, constant: 40),
-            vegiLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
+            vegiLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         sauceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 30),
-            sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
+            sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         chooseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
-            chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
+            chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         chooseStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
