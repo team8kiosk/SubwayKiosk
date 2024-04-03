@@ -15,6 +15,8 @@
 		B63C17182BBADFC900CCA5B8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B63C17172BBADFC900CCA5B8 /* Base */; };
 		CEA2DE382BBCF639009C5DC9 /* BreadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2DE372BBCF639009C5DC9 /* BreadCollectionViewCell.swift */; };
 		CEA2DE3A2BBD046D009C5DC9 /* CheezeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2DE392BBD046D009C5DC9 /* CheezeCollectionViewCell.swift */; };
+		CEEF61F52BBD6DA300C6C06D /* VegiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF61F42BBD6DA300C6C06D /* VegiCollectionViewCell.swift */; };
+		CEEF61F72BBD6DBC00C6C06D /* SauceCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF61F62BBD6DBC00C6C06D /* SauceCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		B63C17192BBADFC900CCA5B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA2DE372BBCF639009C5DC9 /* BreadCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEA2DE392BBD046D009C5DC9 /* CheezeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheezeCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEEF61F42BBD6DA300C6C06D /* VegiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegiCollectionViewCell.swift; sourceTree = "<group>"; };
+		CEEF61F62BBD6DBC00C6C06D /* SauceCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SauceCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 				B63C170F2BBADFC700CCA5B8 /* ViewController.swift */,
 				CEA2DE372BBCF639009C5DC9 /* BreadCollectionViewCell.swift */,
 				CEA2DE392BBD046D009C5DC9 /* CheezeCollectionViewCell.swift */,
+				CEEF61F42BBD6DA300C6C06D /* VegiCollectionViewCell.swift */,
+				CEEF61F62BBD6DBC00C6C06D /* SauceCollectionViewCell.swift */,
 				B63C17112BBADFC700CCA5B8 /* Main.storyboard */,
 				B63C17142BBADFC900CCA5B8 /* Assets.xcassets */,
 				B63C17162BBADFC900CCA5B8 /* LaunchScreen.storyboard */,
@@ -145,8 +151,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B63C17102BBADFC700CCA5B8 /* ViewController.swift in Sources */,
+				CEEF61F72BBD6DBC00C6C06D /* SauceCollectionViewCell.swift in Sources */,
 				CEA2DE3A2BBD046D009C5DC9 /* CheezeCollectionViewCell.swift in Sources */,
 				CEA2DE382BBCF639009C5DC9 /* BreadCollectionViewCell.swift in Sources */,
+				CEEF61F52BBD6DA300C6C06D /* VegiCollectionViewCell.swift in Sources */,
 				B63C170C2BBADFC700CCA5B8 /* AppDelegate.swift in Sources */,
 				B63C170E2BBADFC700CCA5B8 /* SceneDelegate.swift in Sources */,
 			);

@@ -11,6 +11,8 @@ class ViewController: UIViewController {
     
     let breadList: [String] = ["플랫브레드", "허니오트", "하티", "파마산오레가노", "화이트", "위트"]
     let cheezeList: [String] = ["슈레드치즈", "아메리칸치즈", "모짜렐라치즈"]
+    let vegiList: [String] = ["양상추", "토마토", "오이", "피클", "올리브", "양파"]
+    let sauceList: [String] = ["랜치", "마요네즈", "머스타드", "홀스래디쉬", "핫칠리", "올리브오일"]
     
     let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowlayout = UICollectionViewFlowLayout()
@@ -28,14 +30,42 @@ class ViewController: UIViewController {
         return flowlayout
     }()
     
+    let collectionViewFlowLayout3: UICollectionViewFlowLayout = {
+        let flowlayout = UICollectionViewFlowLayout()
+        flowlayout.scrollDirection = .horizontal
+        flowlayout.minimumLineSpacing = 15
+        flowlayout.sectionInset = UIEdgeInsets(top:0, left:0, bottom: 0, right: 0)
+        return flowlayout
+    }()
+    
+    let collectionViewFlowLayout4: UICollectionViewFlowLayout = {
+        let flowlayout = UICollectionViewFlowLayout()
+        flowlayout.scrollDirection = .horizontal
+        flowlayout.minimumLineSpacing = 15
+        flowlayout.sectionInset = UIEdgeInsets(top:0, left:0, bottom: 0, right: 0)
+        return flowlayout
+    }()
+    
     lazy var breadHorizontalBar: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-            collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
     
     lazy var cheezeHorizontalBar: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout2)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    lazy var vegiHorizontalBar: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout3)
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        return collectionView
+    }()
+    
+    lazy var sauceHorizontalBar: UICollectionView = {
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout4)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -73,6 +103,15 @@ class ViewController: UIViewController {
         _30cm.setTitle("30cm", for: .normal)
         _30cm.setTitleColor(.systemBlue, for: .normal)
         
+        lazy var chooseStackView: UIStackView = {
+            let stview = UIStackView(arrangedSubviews: [_15cm, _30cm])
+            stview.spacing = -60
+            stview.axis = .horizontal
+            stview.distribution = .fillEqually
+            stview.alignment = .fill
+            return stview
+        }()
+        
         let Obutton: UIButton = .init(frame: .init())
         Obutton.setTitle("O", for: .normal)
         Obutton.setTitleColor(.systemBlue, for: .normal)
@@ -80,6 +119,15 @@ class ViewController: UIViewController {
         let Xbutton: UIButton = .init(frame: .init())
         Xbutton.setTitle("X", for: .normal)
         Xbutton.setTitleColor(.systemBlue, for: .normal)
+        
+        lazy var OXStackView: UIStackView = {
+            let stview = UIStackView(arrangedSubviews: [Obutton, Xbutton])
+            stview.spacing = -60
+            stview.axis = .horizontal
+            stview.distribution = .fillEqually
+            stview.alignment = .fill
+            return stview
+        }()
         
         let cancelButton: UIButton = .init(frame: .init())
         cancelButton.setTitle("취소하기", for: .normal)
@@ -89,6 +137,14 @@ class ViewController: UIViewController {
         cartButton.setTitle("카트에 담기", for: .normal)
         cartButton.setTitleColor(.systemBlue, for: .normal)
         
+        lazy var cartStackView: UIStackView = {
+            let stview = UIStackView(arrangedSubviews: [cancelButton, cartButton])
+            stview.spacing = -60
+            stview.axis = .horizontal
+            stview.distribution = .fillEqually
+            stview.alignment = .fill
+            return stview
+        }()
         
         let bottom: UIView = .init()
         bottom.backgroundColor = .yellow
@@ -100,15 +156,14 @@ class ViewController: UIViewController {
         self.view.addSubview(vegiLabel)
         self.view.addSubview(sauceLabel)
         self.view.addSubview(chooseLabel)
-        self.view.addSubview(_15cm)
-        self.view.addSubview(_30cm)
+        self.view.addSubview(chooseStackView)
         self.view.addSubview(bottom)
-        self.view.addSubview(cancelButton)
-        self.view.addSubview(cartButton)
-        self.view.addSubview(Obutton)
-        self.view.addSubview(Xbutton)
+        self.view.addSubview(OXStackView)
+        self.view.addSubview(cartStackView)
         self.view.addSubview(breadHorizontalBar)
         self.view.addSubview(cheezeHorizontalBar)
+        self.view.addSubview(vegiHorizontalBar)
+        self.view.addSubview(sauceHorizontalBar)
         
         breadHorizontalBar.delegate = self
         breadHorizontalBar.dataSource = self
@@ -131,6 +186,28 @@ class ViewController: UIViewController {
             cheezeHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
             cheezeHorizontalBar.leadingAnchor.constraint(equalTo: cheezeLabel.trailingAnchor, constant: 50),
             cheezeHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        vegiHorizontalBar.delegate = self
+        vegiHorizontalBar.dataSource = self
+        vegiHorizontalBar.register(VegiCollectionViewCell.self, forCellWithReuseIdentifier: "VegiCollectionViewCell")
+        
+        NSLayoutConstraint.activate([
+            vegiHorizontalBar.topAnchor.constraint(equalTo: OXStackView.bottomAnchor, constant: 30),
+            vegiHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+            vegiHorizontalBar.leadingAnchor.constraint(equalTo: vegiLabel.trailingAnchor, constant: 56),
+            vegiHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        
+        sauceHorizontalBar.delegate = self
+        sauceHorizontalBar.dataSource = self
+        sauceHorizontalBar.register(SauceCollectionViewCell.self, forCellWithReuseIdentifier: "SauceCollectionViewCell")
+        
+        NSLayoutConstraint.activate([
+            sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 10),
+            sauceHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+            sauceHorizontalBar.leadingAnchor.constraint(equalTo: sauceLabel.trailingAnchor, constant: 50),
+            sauceHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
         top.translatesAutoresizingMaskIntoConstraints = false
@@ -159,17 +236,11 @@ class ViewController: UIViewController {
             toastLabel.topAnchor.constraint(equalTo: cheezeLabel.bottomAnchor, constant: 40),
             toastLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
-        
-        Xbutton.translatesAutoresizingMaskIntoConstraints = false
+        OXStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            Xbutton.topAnchor.constraint(equalTo: cheezeHorizontalBar.bottomAnchor, constant: 30),
-            Xbutton.leadingAnchor.constraint(equalTo: Obutton.trailingAnchor, constant: 40)
-        ])
-        
-        Obutton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            Obutton.topAnchor.constraint(equalTo: cheezeHorizontalBar.bottomAnchor, constant: 30),
-            Obutton.leadingAnchor.constraint(equalTo: toastLabel.trailingAnchor, constant: 120)
+            OXStackView.topAnchor.constraint(equalTo: cheezeHorizontalBar.topAnchor, constant: 77),
+            OXStackView.leadingAnchor.constraint(equalTo: toastLabel.trailingAnchor, constant: 60),
+            OXStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
         
         vegiLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -187,29 +258,18 @@ class ViewController: UIViewController {
             chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
             chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
         ])
-        _15cm.translatesAutoresizingMaskIntoConstraints = false
+        chooseStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _15cm.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -20),
-            _15cm.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 30),
-            _15cm.trailingAnchor.constraint(equalTo: _30cm.leadingAnchor, constant: -30)
+            chooseStackView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -20),
+            chooseStackView.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 60),
+            chooseStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
-        _30cm.translatesAutoresizingMaskIntoConstraints = false
+
+        cartStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            _30cm.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -20),
-            _30cm.leadingAnchor.constraint(equalTo: _15cm.trailingAnchor, constant: 0),
-            _30cm.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -30)
-        ])
-        
-        cancelButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cancelButton.bottomAnchor.constraint(equalTo: bottom.topAnchor, constant: -10),
-            cancelButton.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 70)
-        ])
-        
-        cartButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            cartButton.bottomAnchor.constraint(equalTo: bottom.topAnchor, constant: -10),
-            cartButton.leadingAnchor.constraint(equalTo: cancelButton.trailingAnchor, constant: 130)
+            cartStackView.bottomAnchor.constraint(equalTo: bottom.topAnchor, constant: -5),
+            cartStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
+            cartStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
         
         bottom.translatesAutoresizingMaskIntoConstraints = false
@@ -233,8 +293,12 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == breadHorizontalBar {
             return breadList.count
-        } else  {
+        } else if collectionView == cheezeHorizontalBar {
             return cheezeList.count
+        } else if collectionView == vegiHorizontalBar {
+            return vegiList.count
+        } else {
+            return sauceList.count
         }
         
     }
@@ -244,10 +308,20 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             cell.breadText.text = breadList[indexPath.row]
             cell.breadText.textColor = .systemBlue
             return cell
-        } else {
+        } else if collectionView == cheezeHorizontalBar {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CheezeCollectionViewCell", for: indexPath) as? CheezeCollectionViewCell else{return UICollectionViewCell()}
             cell.cheezeText.text = cheezeList[indexPath.row]
             cell.cheezeText.textColor = .systemBlue
+            return cell
+        } else if collectionView == vegiHorizontalBar {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "VegiCollectionViewCell", for: indexPath) as? VegiCollectionViewCell else{return UICollectionViewCell()}
+            cell.vegiText.text = vegiList[indexPath.row]
+            cell.vegiText.textColor = .systemBlue
+            return cell
+        } else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SauceCollectionViewCell", for: indexPath) as? SauceCollectionViewCell else{return UICollectionViewCell()}
+            cell.sauceText.text = sauceList[indexPath.row]
+            cell.sauceText.textColor = .systemBlue
             return cell
         }
     }
@@ -260,12 +334,24 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let textWidth = text.size(withAttributes: [NSAttributedString.Key.font: font]).width
             let cellWidth = textWidth + 10
             return CGSize(width: cellWidth, height: 20)
+        } else if collectionView == cheezeHorizontalBar {
+            let text = cheezeList[indexPath.row]
+            let font = UIFont.systemFont(ofSize: 20)
+            let textWidth = text.size(withAttributes: [NSAttributedString.Key.font: font]).width
+            let cellWidth = textWidth + 0
+            return CGSize(width: cellWidth, height: 18)
+        } else if collectionView == vegiHorizontalBar {
+            let text = vegiList[indexPath.row]
+            let font = UIFont.systemFont(ofSize: 20)
+            let textWidth = text.size(withAttributes: [NSAttributedString.Key.font: font]).width
+            let cellWidth = textWidth + 0
+            return CGSize(width: cellWidth, height: 18)
         } else {
-            let text2 = cheezeList[indexPath.row]
-            let font2 = UIFont.systemFont(ofSize: 20)
-            let textWidth2 = text2.size(withAttributes: [NSAttributedString.Key.font: font2]).width
-            let cellWidth2 = textWidth2 + 0
-            return CGSize(width: cellWidth2, height: 18)
+            let text = sauceList[indexPath.row]
+            let font = UIFont.systemFont(ofSize: 20)
+            let textWidth = text.size(withAttributes: [NSAttributedString.Key.font: font]).width
+            let cellWidth = textWidth + 0
+            return CGSize(width: cellWidth, height: 18)
         }
         
         
