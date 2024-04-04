@@ -39,7 +39,7 @@ class ViewController: UIViewController {
     }()
   
     lazy var tabbarTop: UICollectionView = {
-        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: topCollectionViewFlowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
@@ -123,7 +123,7 @@ class ViewController: UIViewController {
         button.backgroundColor = #colorLiteral(red: 1, green: 0.7588691115, blue: 0.04935026914, alpha: 1)
         button.setTitle("취소하기", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        button.addTarget(ViewController.self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -132,7 +132,7 @@ class ViewController: UIViewController {
         button.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
         button.setTitle("결제하기", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
+        button.addTarget(ViewController.self, action: #selector(payButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -291,8 +291,6 @@ class ViewController: UIViewController {
         setupTableView()
         setupLayout()
         
-        let top: UIView = .init()
-        top.backgroundColor = .cyan
         
         let breadLabel: UILabel = .init()
         breadLabel.text = "빵"
@@ -364,10 +362,7 @@ class ViewController: UIViewController {
             return stview
         }()
         
-        let bottom: UIView = .init()
-        bottom.backgroundColor = .yellow
         
-        self.view.addSubview(top)
         self.view.addSubview(breadLabel)
         self.view.addSubview(cheezeLabel)
         self.view.addSubview(toastLabel)
@@ -375,7 +370,6 @@ class ViewController: UIViewController {
         self.view.addSubview(sauceLabel)
         self.view.addSubview(chooseLabel)
         self.view.addSubview(chooseStackView)
-        self.view.addSubview(bottom)
         self.view.addSubview(OXStackView)
         self.view.addSubview(cartStackView)
         self.view.addSubview(breadHorizontalBar)
@@ -388,7 +382,7 @@ class ViewController: UIViewController {
         breadHorizontalBar.register(BreadCollectionViewCell.self, forCellWithReuseIdentifier: "BreadCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            breadHorizontalBar.topAnchor.constraint(equalTo: top.bottomAnchor, constant: 14),
+            breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 14),
             breadHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
             breadHorizontalBar.leadingAnchor.constraint(equalTo: breadLabel.trailingAnchor, constant: 70),
             breadHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -422,24 +416,17 @@ class ViewController: UIViewController {
         sauceHorizontalBar.register(SauceCollectionViewCell.self, forCellWithReuseIdentifier: "SauceCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 10),
+            sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 0),
             sauceHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
             sauceHorizontalBar.leadingAnchor.constraint(equalTo: sauceLabel.trailingAnchor, constant: 50),
             sauceHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        top.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            top.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 0),
-            top.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-            top.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            top.heightAnchor.constraint(equalToConstant: 180)
-        ])
         
         
         breadLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            breadLabel.topAnchor.constraint(equalTo: top.bottomAnchor, constant: 25),
+            breadLabel.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
             breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         
@@ -468,35 +455,28 @@ class ViewController: UIViewController {
         ])
         sauceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 30),
+            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 20),
             sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         chooseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -20),
+            chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -0),
             chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
         ])
         chooseStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseStackView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -20),
+            chooseStackView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -0),
             chooseStackView.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 60),
             chooseStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
 
         cartStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            cartStackView.bottomAnchor.constraint(equalTo: bottom.topAnchor, constant: -5),
+            cartStackView.bottomAnchor.constraint(equalTo: bottomView.topAnchor, constant: -5),
             cartStackView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 0),
             cartStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
         
-        bottom.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            bottom.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: 0),
-            bottom.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0),
-            bottom.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0),
-            bottom.heightAnchor.constraint(equalToConstant: 188)
-        ])
     }
     
 }
@@ -518,7 +498,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         }
         
     }
-  
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == tabbarTop {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TabbarTopCollectionViewCell", for: indexPath) as? TabbarTopCollectionViewCell else{ return UICollectionViewCell()}
@@ -580,31 +560,28 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             let cellWidth = textWidth + 0
             return CGSize(width: cellWidth, height: 18)
         }
-
-}
-  
-extension ViewController: UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderTableViewCell
-//        cell.menuImageView.image = orderArray[indexPath.row].menuImage
-//        cell.menuLabel.text = orderArray[indexPath.row].menuName
-//        cell.optionLabel.text = orderArray[indexPath.row].menuOption
-//        cell.selectionStyle = .none
-        return cell
-    }
-}
-
-extension ViewController: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
     }
 }
-
-
-
+    extension ViewController: UITableViewDataSource {
+        
+        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+            return 3
+        }
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderTableViewCell
+            //        cell.menuImageView.image = orderArray[indexPath.row].menuImage
+            //        cell.menuLabel.text = orderArray[indexPath.row].menuName
+            //        cell.optionLabel.text = orderArray[indexPath.row].menuOption
+            //        cell.selectionStyle = .none
+            return cell
+        }
+    }
+    
+    extension ViewController: UITableViewDelegate {
+        
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            
+        }
+    }
