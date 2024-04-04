@@ -294,22 +294,22 @@ class ViewController: UIViewController {
         
         let breadLabel: UILabel = .init()
         breadLabel.text = "빵"
-        breadLabel.font = UIFont.systemFont(ofSize: 25.0, weight: .regular)
+        breadLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
         let cheezeLabel: UILabel = .init()
         cheezeLabel.text = "치즈"
-        cheezeLabel.font = UIFont.systemFont(ofSize: 25.0, weight: .regular)
+        cheezeLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
         let toastLabel: UILabel = .init()
         toastLabel.text = "토스팅"
-        toastLabel.font = UIFont.systemFont(ofSize: 25.0, weight: .regular)
+        toastLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
         let vegiLabel: UILabel = .init()
         vegiLabel.text = "야채"
-        vegiLabel.font = UIFont.systemFont(ofSize: 25.0, weight: .regular)
+        vegiLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
         let sauceLabel: UILabel = .init()
         sauceLabel.text = "소스/시즈닝"
-        sauceLabel.font = UIFont.systemFont(ofSize: 25.0, weight: .regular)
+        sauceLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
         let chooseLabel: UILabel = .init()
         chooseLabel.text = "크기"
-        chooseLabel.font = UIFont.systemFont(ofSize: 25.0, weight: .regular)
+        chooseLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
         
         let _15cm: UIButton = .init(frame: .init())
         _15cm.setTitle("15cm", for: .normal)
@@ -405,7 +405,7 @@ class ViewController: UIViewController {
         vegiHorizontalBar.register(VegiCollectionViewCell.self, forCellWithReuseIdentifier: "VegiCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            vegiHorizontalBar.topAnchor.constraint(equalTo: OXStackView.bottomAnchor, constant: 30),
+            vegiHorizontalBar.topAnchor.constraint(equalTo: OXStackView.bottomAnchor, constant: 15 ),
             vegiHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
             vegiHorizontalBar.leadingAnchor.constraint(equalTo: vegiLabel.trailingAnchor, constant: 56),
             vegiHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -416,7 +416,7 @@ class ViewController: UIViewController {
         sauceHorizontalBar.register(SauceCollectionViewCell.self, forCellWithReuseIdentifier: "SauceCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 0),
+            sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 7),
             sauceHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
             sauceHorizontalBar.leadingAnchor.constraint(equalTo: sauceLabel.trailingAnchor, constant: 50),
             sauceHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -427,19 +427,19 @@ class ViewController: UIViewController {
         breadLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             breadLabel.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
-            breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+            breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         
         cheezeLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cheezeLabel.topAnchor.constraint(equalTo: breadLabel.bottomAnchor, constant: 40),
-            cheezeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+            cheezeLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         
         toastLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             toastLabel.topAnchor.constraint(equalTo: cheezeLabel.bottomAnchor, constant: 40),
-            toastLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+            toastLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         OXStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -451,17 +451,17 @@ class ViewController: UIViewController {
         vegiLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             vegiLabel.topAnchor.constraint(equalTo: toastLabel.bottomAnchor, constant: 40),
-            vegiLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+            vegiLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         sauceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 20),
-            sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 30),
+            sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         chooseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -0),
-            chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+            chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         chooseStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
