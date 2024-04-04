@@ -25,14 +25,17 @@ class ViewController: UIViewController {
     
     lazy var titleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.green
+        view.backgroundColor = UIColor.subGreen
         return view
     }()
     
     lazy var titleText: UILabel = {
         let label = UILabel()
-        label.text = "SubEight"
-        label.textColor = .white
+        let text = "SubEight"
+        let attributeString = NSMutableAttributedString(string: text)
+        attributeString.addAttribute(.foregroundColor, value: UIColor.subYellow, range: (text as NSString).range(of: "Sub"))
+        attributeString.addAttribute(.foregroundColor, value: UIColor.white, range: (text as NSString).range(of: "Eight"))
+        label.attributedText = attributeString
         label.font = UIFont.systemFont(ofSize: 35.0, weight: .black)
         label.clipsToBounds = true
         return label
@@ -585,3 +588,5 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             
         }
     }
+
+
