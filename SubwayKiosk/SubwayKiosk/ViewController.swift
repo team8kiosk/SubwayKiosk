@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class ViewController: UIViewController {
 
@@ -294,22 +293,23 @@ class ViewController: UIViewController {
         
         let breadLabel: UILabel = .init()
         breadLabel.text = "빵"
-        breadLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
+        breadLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
         let cheezeLabel: UILabel = .init()
         cheezeLabel.text = "치즈"
-        cheezeLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
+        cheezeLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
         let toastLabel: UILabel = .init()
         toastLabel.text = "토스팅"
-        toastLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
+        toastLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
         let vegiLabel: UILabel = .init()
         vegiLabel.text = "야채"
-        vegiLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
+        vegiLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
         let sauceLabel: UILabel = .init()
         sauceLabel.text = "소스/시즈닝"
-        sauceLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
+        sauceLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
         let chooseLabel: UILabel = .init()
         chooseLabel.text = "크기"
-        chooseLabel.font = UIFont.systemFont(ofSize: 22.0, weight: .regular)
+        chooseLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
+        
         
         let _15cm: UIButton = .init(frame: .init())
         _15cm.setTitle("15cm", for: .normal)
@@ -327,7 +327,7 @@ class ViewController: UIViewController {
             stview.alignment = .fill
             return stview
         }()
-        
+
         let Obutton: UIButton = .init(frame: .init())
         Obutton.setTitle("O", for: .normal)
         Obutton.setTitleColor(.systemBlue, for: .normal)
@@ -382,8 +382,8 @@ class ViewController: UIViewController {
         breadHorizontalBar.register(BreadCollectionViewCell.self, forCellWithReuseIdentifier: "BreadCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 14),
-            breadHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+            breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
+            breadHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
             breadHorizontalBar.leadingAnchor.constraint(equalTo: breadLabel.trailingAnchor, constant: 70),
             breadHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -394,8 +394,8 @@ class ViewController: UIViewController {
         cheezeHorizontalBar.register(CheezeCollectionViewCell.self, forCellWithReuseIdentifier: "CheezeCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            cheezeHorizontalBar.topAnchor.constraint(equalTo: breadHorizontalBar.bottomAnchor, constant: 20),
-            cheezeHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+            cheezeHorizontalBar.topAnchor.constraint(equalTo: breadHorizontalBar.bottomAnchor, constant: 45),
+            cheezeHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
             cheezeHorizontalBar.leadingAnchor.constraint(equalTo: cheezeLabel.trailingAnchor, constant: 50),
             cheezeHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -405,8 +405,8 @@ class ViewController: UIViewController {
         vegiHorizontalBar.register(VegiCollectionViewCell.self, forCellWithReuseIdentifier: "VegiCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            vegiHorizontalBar.topAnchor.constraint(equalTo: OXStackView.bottomAnchor, constant: 15 ),
-            vegiHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+            vegiHorizontalBar.topAnchor.constraint(equalTo: OXStackView.bottomAnchor, constant: 35),
+            vegiHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
             vegiHorizontalBar.leadingAnchor.constraint(equalTo: vegiLabel.trailingAnchor, constant: 56),
             vegiHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -416,12 +416,11 @@ class ViewController: UIViewController {
         sauceHorizontalBar.register(SauceCollectionViewCell.self, forCellWithReuseIdentifier: "SauceCollectionViewCell")
         
         NSLayoutConstraint.activate([
-            sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 7),
-            sauceHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+            sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 45),
+            sauceHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
             sauceHorizontalBar.leadingAnchor.constraint(equalTo: sauceLabel.trailingAnchor, constant: 50),
             sauceHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
         
         
         breadLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -443,7 +442,7 @@ class ViewController: UIViewController {
         ])
         OXStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            OXStackView.topAnchor.constraint(equalTo: cheezeHorizontalBar.topAnchor, constant: 77),
+            OXStackView.topAnchor.constraint(equalTo: cheezeHorizontalBar.topAnchor, constant: 55),
             OXStackView.leadingAnchor.constraint(equalTo: toastLabel.trailingAnchor, constant: 60),
             OXStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
@@ -455,17 +454,17 @@ class ViewController: UIViewController {
         ])
         sauceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 30),
+            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 40),
             sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         chooseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -0),
+            chooseLabel.topAnchor.constraint(equalTo: sauceLabel.bottomAnchor, constant: 40),
             chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         chooseStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseStackView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -0),
+            chooseStackView.topAnchor.constraint(equalTo: sauceHorizontalBar.topAnchor, constant: 50),
             chooseStackView.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 60),
             chooseStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])

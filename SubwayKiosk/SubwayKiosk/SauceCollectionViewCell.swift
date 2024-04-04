@@ -8,6 +8,13 @@
 import UIKit
 
 class SauceCollectionViewCell: UICollectionViewCell {
+    
+    let sauceBackView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     let sauceText: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -15,12 +22,34 @@ class SauceCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    override var isSelected: Bool {
+        didSet{
+            if isSelected {
+                sauceBackView.backgroundColor = UIColor.yellow
+                sauceText.textColor = .black
+            }
+            else {
+                sauceText.textColor = .systemBlue
+                sauceBackView.backgroundColor = UIColor.white
+            }
+        }
+    }
+    
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         
-        self.addSubview(sauceText)
-        translatesAutoresizingMaskIntoConstraints = false
+        addSubview(sauceBackView)
+        sauceBackView.addSubview(sauceText)
+        
+        NSLayoutConstraint.activate([
+                    sauceBackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                    sauceBackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                    sauceBackView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+                    sauceBackView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+                ])
         
         NSLayoutConstraint.activate([
             sauceText.centerXAnchor.constraint(equalTo: self.centerXAnchor),
