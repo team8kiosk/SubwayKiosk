@@ -12,6 +12,7 @@ class SauceCollectionViewCell: UICollectionViewCell {
     let sauceBackView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 20
         return view
     }()
     
@@ -27,10 +28,8 @@ class SauceCollectionViewCell: UICollectionViewCell {
         didSet{
             if isSelected {
                 sauceBackView.backgroundColor = UIColor.yellow
-                sauceText.textColor = .black
             }
             else {
-                sauceText.textColor = .systemBlue
                 sauceBackView.backgroundColor = UIColor.white
             }
         }

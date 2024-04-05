@@ -11,6 +11,7 @@ class BreadCollectionViewCell: UICollectionViewCell {
     let breadBackView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 20
         return view
     }()
 
@@ -26,10 +27,8 @@ class BreadCollectionViewCell: UICollectionViewCell {
         didSet{
             if isSelected {
                 breadBackView.backgroundColor = UIColor.yellow
-                breadText.textColor = .black
             }
             else {
-                breadText.textColor = .systemBlue
                 breadBackView.backgroundColor = UIColor.white
             }
         }

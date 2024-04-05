@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         let view = UIView()
         view.backgroundColor = UIColor.clear
         return view
-    }() 
+    }()
     
     lazy var titleView: UIView = {
         let view = UIView()
@@ -35,13 +35,13 @@ class ViewController: UIViewController {
         label.clipsToBounds = true
         return label
     }()
-  
+    
     lazy var tabbarTop: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: topCollectionViewFlowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-  
+    
     let topCollectionViewFlowLayout: UICollectionViewFlowLayout = {
         let flowlayout = UICollectionViewFlowLayout()
         flowlayout.scrollDirection = .horizontal
@@ -82,14 +82,14 @@ class ViewController: UIViewController {
         flowlayout.sectionInset = UIEdgeInsets(top:0, left:0, bottom: 0, right: 0)
         return flowlayout
     }()
-
+    
     lazy var breadHorizontalBar: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-      
-
+    
+    
     lazy var cheezeHorizontalBar: UICollectionView = {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout2)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -107,7 +107,7 @@ class ViewController: UIViewController {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
-
+    
     //bottom view
     lazy var bottomView: UIView = {
         let view = UIView()
@@ -186,7 +186,7 @@ class ViewController: UIViewController {
     }()
     
     let tableView = UITableView()
-  
+    
     func setTopUI () {
         
         view.addSubview(topView)
@@ -229,7 +229,7 @@ class ViewController: UIViewController {
             tabbarTop.trailingAnchor.constraint(equalTo: topView.trailingAnchor)
         ])
     }
-
+    
     func setupTableView() {
         
         tableView.dataSource = self
@@ -237,7 +237,7 @@ class ViewController: UIViewController {
         tableView.rowHeight = 120
         tableView.backgroundColor = .blue
         tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: "OrderCell")
-    
+        
         tableView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
@@ -279,23 +279,23 @@ class ViewController: UIViewController {
         
     }
     
-     lazy var oButton: UIButton = {
+    lazy var oButton: UIButton = {
         let btn = UIButton()
         btn.setTitle("O", for: .normal)
         btn.backgroundColor = .clear
         btn.setTitleColor(.systemBlue, for: .normal)
         btn.layer.cornerRadius = 20
-         btn.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
+        btn.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
         return btn
     }()
     
-     lazy var xButton: UIButton = {
+    lazy var xButton: UIButton = {
         let btn2 = UIButton()
         btn2.setTitle("X", for: .normal)
         btn2.backgroundColor = .clear
         btn2.setTitleColor(.systemBlue, for: .normal)
         btn2.layer.cornerRadius = 20
-         btn2.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
+        btn2.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
         return btn2
     }()
     
@@ -308,36 +308,36 @@ class ViewController: UIViewController {
         sender.isSelected = true
         sender.backgroundColor = .yellow
     }
-   
+    
     lazy var _15Button: UIButton = {
-       let btn = UIButton()
-       btn.setTitle("15cm", for: .normal)
-       btn.backgroundColor = .clear
-       btn.setTitleColor(.systemBlue, for: .normal)
-       btn.layer.cornerRadius = 20
+        let btn = UIButton()
+        btn.setTitle("15cm", for: .normal)
+        btn.backgroundColor = .clear
+        btn.setTitleColor(.systemBlue, for: .normal)
+        btn.layer.cornerRadius = 20
         btn.addTarget(self, action: #selector(cmButtonTapped), for: .touchUpInside)
-       return btn
-   }()
-   
+        return btn
+    }()
+    
     lazy var _30Button: UIButton = {
-       let btn2 = UIButton()
-       btn2.setTitle("30cm", for: .normal)
-       btn2.backgroundColor = .clear
-       btn2.setTitleColor(.systemBlue, for: .normal)
-       btn2.layer.cornerRadius = 20
+        let btn2 = UIButton()
+        btn2.setTitle("30cm", for: .normal)
+        btn2.backgroundColor = .clear
+        btn2.setTitleColor(.systemBlue, for: .normal)
+        btn2.layer.cornerRadius = 20
         btn2.addTarget(self, action: #selector(cmButtonTapped), for: .touchUpInside)
-       return btn2
-   }()
-   
-   @objc func cmButtonTapped (_ sender: UIButton) {
-       _15Button.isSelected = false
-       _30Button.isSelected = false
-       _15Button.backgroundColor = .clear
-       _30Button.backgroundColor = .clear
-       
-       sender.isSelected = true
-       sender.backgroundColor = .yellow
-   }
+        return btn2
+    }()
+    
+    @objc func cmButtonTapped (_ sender: UIButton) {
+        _15Button.isSelected = false
+        _30Button.isSelected = false
+        _15Button.backgroundColor = .clear
+        _30Button.backgroundColor = .clear
+        
+        sender.isSelected = true
+        sender.backgroundColor = .yellow
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -349,7 +349,6 @@ class ViewController: UIViewController {
         setupTableView()
         setupLayout()
         
-    
         
         let breadLabel: UILabel = .init()
         breadLabel.text = "빵"
@@ -517,7 +516,7 @@ class ViewController: UIViewController {
             chooseStackView.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 60),
             chooseStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
-
+        
         cartStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             cartStackView.bottomAnchor.constraint(equalTo: bottomView.topAnchor, constant: -5),
@@ -611,31 +610,31 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
         
     }
 }
-    extension ViewController: UITableViewDataSource {
-        
-        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return 3
-        }
-        
-        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderTableViewCell
-            //        cell.menuImageView.image = orderArray[indexPath.row].menuImage
-            //        cell.menuLabel.text = orderArray[indexPath.row].menuName
-            //        cell.optionLabel.text = orderArray[indexPath.row].menuOption
-            //        cell.selectionStyle = .none
-            return cell
-        }
+extension ViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
     }
     
-    extension ViewController: UITableViewDelegate {
-        
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            
-        }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderTableViewCell
+        //        cell.menuImageView.image = orderArray[indexPath.row].menuImage
+        //        cell.menuLabel.text = orderArray[indexPath.row].menuName
+        //        cell.optionLabel.text = orderArray[indexPath.row].menuOption
+        //        cell.selectionStyle = .none
+        return cell
     }
+}
+
+extension ViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+}
 
 
 
 #Preview {
-  ViewController()
+    ViewController()
 }
