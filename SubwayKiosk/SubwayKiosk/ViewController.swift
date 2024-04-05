@@ -8,7 +8,6 @@
 import UIKit
 
 class ViewController: UIViewController {
-
     let breadList: [String] = ["플랫브레드", "허니오트", "하티", "파마산오레가노", "화이트", "위트"]
     let cheezeList: [String] = ["슈레드치즈", "아메리칸치즈", "모짜렐라치즈"]
     let vegiList: [String] = ["양상추", "토마토", "오이", "피클", "올리브", "양파"]
@@ -280,16 +279,77 @@ class ViewController: UIViewController {
         
     }
     
+     lazy var oButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("O", for: .normal)
+        btn.backgroundColor = .clear
+        btn.setTitleColor(.systemBlue, for: .normal)
+        btn.layer.cornerRadius = 20
+         btn.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+     lazy var xButton: UIButton = {
+        let btn2 = UIButton()
+        btn2.setTitle("X", for: .normal)
+        btn2.backgroundColor = .clear
+        btn2.setTitleColor(.systemBlue, for: .normal)
+        btn2.layer.cornerRadius = 20
+         btn2.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
+        return btn2
+    }()
+    
+    @objc func oxButtonTapped (_ sender: UIButton) {
+        oButton.isSelected = false
+        xButton.isSelected = false
+        oButton.backgroundColor = .clear
+        xButton.backgroundColor = .clear
+        
+        sender.isSelected = true
+        sender.backgroundColor = .yellow
+    }
+   
+    lazy var _15Button: UIButton = {
+       let btn = UIButton()
+       btn.setTitle("15cm", for: .normal)
+       btn.backgroundColor = .clear
+       btn.setTitleColor(.systemBlue, for: .normal)
+       btn.layer.cornerRadius = 20
+        btn.addTarget(self, action: #selector(cmButtonTapped), for: .touchUpInside)
+       return btn
+   }()
+   
+    lazy var _30Button: UIButton = {
+       let btn2 = UIButton()
+       btn2.setTitle("30cm", for: .normal)
+       btn2.backgroundColor = .clear
+       btn2.setTitleColor(.systemBlue, for: .normal)
+       btn2.layer.cornerRadius = 20
+        btn2.addTarget(self, action: #selector(cmButtonTapped), for: .touchUpInside)
+       return btn2
+   }()
+   
+   @objc func cmButtonTapped (_ sender: UIButton) {
+       _15Button.isSelected = false
+       _30Button.isSelected = false
+       _15Button.backgroundColor = .clear
+       _30Button.backgroundColor = .clear
+       
+       sender.isSelected = true
+       sender.backgroundColor = .yellow
+   }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
         setTopUI()
-      
+        
         
         view.addSubview(bottomView)
         setupTableView()
         setupLayout()
         
+    
         
         let breadLabel: UILabel = .init()
         breadLabel.text = "빵"
@@ -311,34 +371,19 @@ class ViewController: UIViewController {
         chooseLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
         
         
-        let _15cm: UIButton = .init(frame: .init())
-        _15cm.setTitle("15cm", for: .normal)
-        _15cm.setTitleColor(.systemBlue, for: .normal)
-        
-        let _30cm: UIButton = .init(frame: .init())
-        _30cm.setTitle("30cm", for: .normal)
-        _30cm.setTitleColor(.systemBlue, for: .normal)
         
         lazy var chooseStackView: UIStackView = {
-            let stview = UIStackView(arrangedSubviews: [_15cm, _30cm])
-            stview.spacing = -60
+            let stview = UIStackView(arrangedSubviews: [_15Button, _30Button])
+            stview.spacing = 0
             stview.axis = .horizontal
             stview.distribution = .fillEqually
             stview.alignment = .fill
             return stview
         }()
-
-        let Obutton: UIButton = .init(frame: .init())
-        Obutton.setTitle("O", for: .normal)
-        Obutton.setTitleColor(.systemBlue, for: .normal)
-        
-        let Xbutton: UIButton = .init(frame: .init())
-        Xbutton.setTitle("X", for: .normal)
-        Xbutton.setTitleColor(.systemBlue, for: .normal)
         
         lazy var OXStackView: UIStackView = {
-            let stview = UIStackView(arrangedSubviews: [Obutton, Xbutton])
-            stview.spacing = -60
+            let stview = UIStackView(arrangedSubviews: [oButton, xButton])
+            stview.spacing = 0
             stview.axis = .horizontal
             stview.distribution = .fillEqually
             stview.alignment = .fill
@@ -362,7 +407,6 @@ class ViewController: UIViewController {
             return stview
         }()
         
-        
         self.view.addSubview(breadLabel)
         self.view.addSubview(cheezeLabel)
         self.view.addSubview(toastLabel)
@@ -377,10 +421,11 @@ class ViewController: UIViewController {
         self.view.addSubview(vegiHorizontalBar)
         self.view.addSubview(sauceHorizontalBar)
         
+        
+        
         breadHorizontalBar.delegate = self
         breadHorizontalBar.dataSource = self
         breadHorizontalBar.register(BreadCollectionViewCell.self, forCellWithReuseIdentifier: "BreadCollectionViewCell")
-        
         NSLayoutConstraint.activate([
             breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
             breadHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
@@ -403,9 +448,10 @@ class ViewController: UIViewController {
         vegiHorizontalBar.delegate = self
         vegiHorizontalBar.dataSource = self
         vegiHorizontalBar.register(VegiCollectionViewCell.self, forCellWithReuseIdentifier: "VegiCollectionViewCell")
+        vegiHorizontalBar.allowsMultipleSelection = true
         
         NSLayoutConstraint.activate([
-            vegiHorizontalBar.topAnchor.constraint(equalTo: OXStackView.bottomAnchor, constant: 35),
+            vegiHorizontalBar.topAnchor.constraint(equalTo: OXStackView.bottomAnchor, constant: 43),
             vegiHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
             vegiHorizontalBar.leadingAnchor.constraint(equalTo: vegiLabel.trailingAnchor, constant: 56),
             vegiHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -414,6 +460,7 @@ class ViewController: UIViewController {
         sauceHorizontalBar.delegate = self
         sauceHorizontalBar.dataSource = self
         sauceHorizontalBar.register(SauceCollectionViewCell.self, forCellWithReuseIdentifier: "SauceCollectionViewCell")
+        sauceHorizontalBar.allowsMultipleSelection = true
         
         NSLayoutConstraint.activate([
             sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 45),
@@ -442,7 +489,8 @@ class ViewController: UIViewController {
         ])
         OXStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            OXStackView.topAnchor.constraint(equalTo: cheezeHorizontalBar.topAnchor, constant: 55),
+            OXStackView.topAnchor.constraint(equalTo: cheezeHorizontalBar.topAnchor, constant: 63),
+            OXStackView.heightAnchor.constraint(equalToConstant: 17),
             OXStackView.leadingAnchor.constraint(equalTo: toastLabel.trailingAnchor, constant: 60),
             OXStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
@@ -464,7 +512,8 @@ class ViewController: UIViewController {
         ])
         chooseStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseStackView.topAnchor.constraint(equalTo: sauceHorizontalBar.topAnchor, constant: 50),
+            chooseStackView.topAnchor.constraint(equalTo: sauceHorizontalBar.topAnchor, constant: 63),
+            chooseStackView.heightAnchor.constraint(equalToConstant: 17),
             chooseStackView.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 60),
             chooseStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
@@ -584,3 +633,9 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             
         }
     }
+
+
+
+#Preview {
+  ViewController()
+}
