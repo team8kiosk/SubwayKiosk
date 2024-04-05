@@ -14,7 +14,10 @@ class ViewController: UIViewController {
     let sauceList: [String] = ["랜치", "마요네즈", "머스타드", "홀스래디쉬", "핫칠리", "올리브오일"]
     let menuList: [String] = ["에그마요", "폴드포크", "쉬림프", "이탈리안비엘티", "스파이시이탈리안비엘티", "k바베큐", "스테이크앤치즈"]
     
-    var orderList: [Menu] = []
+    var order: Order = Order(menu: .eggmayo)
+    var orderList: [Order] = []
+    var totalValue: Int = 0
+    var stepperValues: [Int] = []
     
     //top view
     lazy var topView: UIView = {
@@ -118,26 +121,72 @@ class ViewController: UIViewController {
         return view
     }()
     
-    let cancelButton: UIButton = {
+    let initButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = #colorLiteral(red: 1, green: 0.7588691115, blue: 0.04935026914, alpha: 1)
         button.setTitle("취소하기", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
-        button.addTarget(ViewController.self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(initButtonTapped), for: .touchUpInside)
         return button
     }()
+    
+    @objc func initButtonTapped() {
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.initButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.initButton.transform = CGAffineTransform.identity
+            }
+        }
+        
+        let alert = UIAlertController(title: "취소하기", message: "주문을 취소하시겠습니까?", preferredStyle: .alert)
+        let add = UIAlertAction(title: "확인", style: .default) { [self] _ in
+            self.orderList = []
+            self.tableView.reloadData()
+            self.totalCountLabel.text = "0개"
+            self.totalPriceLabel.text = "0원"
+            self.totalValue = 0
+            stepperValues = []
+        }
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(add)
+        alert.addAction(cancel)
+            
+        self.present(alert, animated: false)
+    }
+    
+    @objc func payButtonTapped() {
+        
+        UIView.animate(withDuration: 0.1, animations: {
+            self.payButton.transform = CGAffineTransform(scaleX: 0.95, y: 0.95)
+        }) { _ in
+            UIView.animate(withDuration: 0.1) {
+                self.payButton.transform = CGAffineTransform.identity
+            }
+        }
+    
+        let alert = UIAlertController(title: "결제하기", message: "결제하시겠습니까?", preferredStyle: .alert)
+        let add = UIAlertAction(title: "확인", style: .default)
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        alert.addAction(add)
+        alert.addAction(cancel)
+            
+        self.present(alert, animated: false)
+    }
     
     let payButton: UIButton = {
         let button = UIButton(type: .custom)
         button.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
         button.setTitle("결제하기", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
-        button.addTarget(ViewController.self, action: #selector(payButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
         return button
     }()
     
     lazy var buttonStackView: UIStackView = {
-        let stview = UIStackView(arrangedSubviews: [cancelButton, payButton])
+        let stview = UIStackView(arrangedSubviews: [initButton, payButton])
         stview.spacing = 10
         stview.axis = .horizontal
         stview.distribution = .fillEqually
@@ -147,35 +196,34 @@ class ViewController: UIViewController {
     
     let totalCountLabel: UILabel = {
         let label = UILabel()
-        label.text = "3개"
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.text = "0개"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        label.frame.size.width = 100
         return label
     }()
     
     let totalLabel: UILabel = {
         let label = UILabel()
         label.text = "총 주문 가격"
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        label.frame.size.width = 100
+        label.textAlignment = .center
         return label
     }()
     
     let totalPriceLabel: UILabel = {
         let label = UILabel()
-        label.text = "20,000원"
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.text = "0원"
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        label.frame.size.width = 100
+        label.textAlignment = .right
         return label
     }()
     
     lazy var totalStackView: UIView = {
         let stview = UIStackView(arrangedSubviews: [totalCountLabel, totalLabel, totalPriceLabel])
         stview.axis = .horizontal
-        stview.distribution = .equalCentering
+        stview.distribution = .fillEqually
         stview.alignment = .fill
         return stview
     }()
@@ -236,8 +284,7 @@ class ViewController: UIViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.rowHeight = 120
-        tableView.backgroundColor = .blue
+        tableView.rowHeight = 60
         tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: "OrderCell")
         
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -255,6 +302,7 @@ class ViewController: UIViewController {
         bottomView.translatesAutoresizingMaskIntoConstraints = false
         buttonStackView.translatesAutoresizingMaskIntoConstraints = false
         totalView.translatesAutoresizingMaskIntoConstraints = false
+        totalStackView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             bottomView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 0),
@@ -269,16 +317,13 @@ class ViewController: UIViewController {
             totalView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15),
             totalView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15),
             totalView.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 5),
-            totalView.heightAnchor.constraint(equalToConstant: 30)
+            totalView.heightAnchor.constraint(equalToConstant: 30),
+            
+            totalStackView.leadingAnchor.constraint(equalTo: totalView.leadingAnchor, constant: 15),
+            totalStackView.trailingAnchor.constraint(equalTo: totalView.trailingAnchor, constant: -15),
+            totalStackView.centerYAnchor.constraint(equalTo: totalView.centerYAnchor),
+            totalStackView.heightAnchor.constraint(equalToConstant: 30)
         ])
-    }
-    
-    @objc func cancelButtonTapped() {
-        
-    }
-    
-    @objc func payButtonTapped() {
-        
     }
     
     lazy var oButton: UIButton = {
@@ -309,6 +354,7 @@ class ViewController: UIViewController {
         
         sender.isSelected = true
         sender.backgroundColor = .yellow
+        order.toast = sender.currentTitle == "O" ? .toast : .plain
     }
     
     lazy var _15Button: UIButton = {
@@ -339,18 +385,17 @@ class ViewController: UIViewController {
         
         sender.isSelected = true
         sender.backgroundColor = .yellow
+        order.size = sender.currentTitle == "15cm" ? .half : .whole
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTopUI()
-        
-        
+    
         view.addSubview(bottomView)
         setupTableView()
         setupLayout()
-        
         
         let breadLabel: UILabel = .init()
         breadLabel.text = "빵"
@@ -394,10 +439,12 @@ class ViewController: UIViewController {
         let cancelButton: UIButton = .init(frame: .init())
         cancelButton.setTitle("취소하기", for: .normal)
         cancelButton.setTitleColor(.systemBlue, for: .normal)
+        cancelButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         
         let cartButton: UIButton = .init(frame: .init())
         cartButton.setTitle("카트에 담기", for: .normal)
         cartButton.setTitleColor(.systemBlue, for: .normal)
+        cartButton.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         
         lazy var cartStackView: UIStackView = {
             let stview = UIStackView(arrangedSubviews: [cancelButton, cartButton])
@@ -422,8 +469,7 @@ class ViewController: UIViewController {
         self.view.addSubview(vegiHorizontalBar)
         self.view.addSubview(sauceHorizontalBar)
         
-        
-        
+    
         breadHorizontalBar.delegate = self
         breadHorizontalBar.dataSource = self
         breadHorizontalBar.register(BreadCollectionViewCell.self, forCellWithReuseIdentifier: "BreadCollectionViewCell")
@@ -530,7 +576,6 @@ class ViewController: UIViewController {
     
 }
 
-
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -612,45 +657,173 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! TabbarTopCollectionViewCell
-        let menu = cell.menuText.text
-        switch menu {
-        case "에그마요":
-            orderList.append(Menu.eggmayo())
-        case "폴드포크":
-            orderList.append(Menu.pulled())
-        case "쉬림프":
-            orderList.append(Menu.shrimp())
-        case "이탈리안비엘티":
-            orderList.append(Menu.italian())
-        case "스파이시이탈리안비엘티":
-            orderList.append(Menu.spicy())
-        case "k바베큐":
-            orderList.append(Menu.kbarbeque())
-        case "스테이크앤치즈":
-            orderList.append(Menu.steakcheese())
-        default:
-            break
+        
+        if collectionView == tabbarTop {
+            initFunc()
+            let cell = collectionView.cellForItem(at: indexPath) as! TabbarTopCollectionViewCell
+            let menu = cell.menuText.text
+            switch menu {
+            case "에그마요":
+                order = Order(menu: Menu.eggmayo)
+            case "폴드포크":
+                order = Order(menu: Menu.pulled)
+            case "쉬림프":
+                order = Order(menu: Menu.shrimp)
+            case "이탈리안비엘티":
+                order = Order(menu: Menu.italian)
+            case "스파이시이탈리안비엘티":
+                order = Order(menu: Menu.spicy)
+            case "k바베큐":
+                order = Order(menu: Menu.kbarbeque)
+            case "스테이크앤치즈":
+                order = Order(menu: Menu.steakcheese)
+            default:
+                break
+            }
+        }
+        
+        if collectionView == breadHorizontalBar {
+            let cell = collectionView.cellForItem(at: indexPath) as! BreadCollectionViewCell
+            let bread = cell.breadText.text
+            switch bread {
+            case "플랫브레드":
+                order.bread = .flat
+            case "허니오트":
+                order.bread = .honey
+            case "하티":
+                order.bread = .hearty
+            case "파마산오레가노":
+                order.bread = .parmesan
+            case "화이트":
+                order.bread = .white
+            case "위트":
+                order.bread = .wheat
+            default:
+                order.bread = .flat
+            }
+        }
+        
+        
+        if collectionView == cheezeHorizontalBar {
+            let cell = collectionView.cellForItem(at: indexPath) as! CheezeCollectionViewCell
+            let cheese = cell.cheezeText.text
+            switch cheese {
+            case "슈레드치즈":
+                order.cheese = .shredded
+            case "아메리칸치즈":
+                order.cheese = .american
+            case "모짜렐라치즈":
+                order.cheese = .mozza
+            default:
+                order.cheese = .shredded
+            }
+        }
+        
+        if collectionView == vegiHorizontalBar {
+            let cell = collectionView.cellForItem(at: indexPath) as! VegiCollectionViewCell
+            let veggie = cell.vegiText.text
+            switch veggie {
+            case "양상추":
+                order.veggie.append(.lettuce)
+            case "토마토":
+                order.veggie.append(.tomato)
+            case "오이":
+                order.veggie.append(.cucumber)
+            case "피클":
+                order.veggie.append(.pickle)
+            case "올리브":
+                order.veggie.append(.olive)
+            case "양파":
+                order.veggie.append(.onion)
+            default:
+                break
+            }
+        }
+        
+        if collectionView == sauceHorizontalBar {
+            let cell = collectionView.cellForItem(at: indexPath) as! SauceCollectionViewCell
+            let sauce = cell.sauceText.text
+            switch sauce {
+            case "랜치":
+                order.sauce.append(.ranch)
+            case "마요네즈":
+                order.sauce.append(.mayo)
+            case "머스타드":
+                order.sauce.append(.mustard)
+            case "홀스래디쉬":
+                order.sauce.append(.horse)
+            case "핫칠리":
+                order.sauce.append(.hotchilli)
+            case "올리브오일":
+                order.sauce.append(.oliveoil)
+            default:
+                break
+            }
         }
     }
-}
+    
+    func initFunc() {
+        for i in [breadHorizontalBar, cheezeHorizontalBar,vegiHorizontalBar, sauceHorizontalBar] {
+            if let indexPaths = i.indexPathsForSelectedItems {
+                for indexPath in indexPaths {
+                    i.deselectItem(at: indexPath, animated: false)
+                }
+            }
+        }
+        oButton.backgroundColor = .clear
+        xButton.backgroundColor = .clear
+        _15Button.backgroundColor = .clear
+        _30Button.backgroundColor = .clear
+    }
+    
+    @objc func cartButtonTapped() {
+        orderList.append(order)
+        stepperValues.append(1)
+        tableView.reloadData()
+        updateTotalValue()
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
 
+        totalCountLabel.text = "\(totalValue)개"
+        totalPriceLabel.text = "\(formatter.string(from: NSNumber(value: totalValue * 8000)) ?? "0")원"
+        
+        initFunc()
+    }
+    
+    @objc func cancelButtonTapped() {
+        initFunc()
+    }
+    
+    func updateTotalValue() {
+        totalValue = stepperValues.reduce(0, +)
+        
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+
+        totalCountLabel.text = "\(totalValue)개"
+        totalPriceLabel.text = "\(formatter.string(from: NSNumber(value: totalValue * 8000)) ?? "0")원"
+    }
+}
+    
 extension ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return orderList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "OrderCell", for: indexPath) as! OrderTableViewCell
-        //        cell.menuImageView.image = orderArray[indexPath.row].menuImage
-        //        cell.menuLabel.text = orderArray[indexPath.row].menuName
-        //        cell.optionLabel.text = orderArray[indexPath.row].menuOption
-        //        cell.selectionStyle = .none
+        let order = orderList[indexPath.row]
+        cell.menuLabel.text = order.menu.rawValue
+        cell.optionLabel.text! = [order.bread.rawValue, order.cheese.rawValue, order.toast.rawValue].joined(separator: ", ")
+        cell.selectionStyle = .none
+        cell.stepperValueChanged = { [weak self] newValue in
+            self?.stepperValues[indexPath.row] = newValue
+            self?.updateTotalValue()
+        }
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
 }
+
