@@ -26,7 +26,7 @@ class TabbarTopCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet{
             if isSelected {
-                backView.backgroundColor = UIColor.lightGray
+                backView.backgroundColor = UIColor.subYellow
                 menuText.textColor = .black
             }
             else {
