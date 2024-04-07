@@ -12,7 +12,7 @@ class SauceCollectionViewCell: UICollectionViewCell {
     let sauceBackView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 15
         return view
     }()
     
@@ -27,10 +27,12 @@ class SauceCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet{
             if isSelected {
-                sauceBackView.backgroundColor = UIColor.yellow
+                sauceBackView.backgroundColor = UIColor.subYellow
+                sauceText.textColor = .black
             }
             else {
                 sauceBackView.backgroundColor = UIColor.white
+                sauceText.textColor = .darkGray
             }
         }
     }
