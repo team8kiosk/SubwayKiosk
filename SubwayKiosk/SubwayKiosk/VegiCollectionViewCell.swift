@@ -12,7 +12,7 @@ class VegiCollectionViewCell: UICollectionViewCell {
     let vegiBackView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 15
         return view
     }()
     
@@ -27,10 +27,12 @@ class VegiCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet{
             if isSelected {
-                vegiBackView.backgroundColor = UIColor.yellow
+                vegiBackView.backgroundColor = UIColor.subYellow
+                vegiText.textColor = .black
             }
             else {
                 vegiBackView.backgroundColor = UIColor.white
+                vegiText.textColor = .darkGray
             }
         }
     }

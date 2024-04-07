@@ -12,7 +12,7 @@ class CheezeCollectionViewCell: UICollectionViewCell {
     let cheezeBackView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 20
+        view.layer.cornerRadius = 15
         return view
     }()
     
@@ -27,10 +27,12 @@ class CheezeCollectionViewCell: UICollectionViewCell {
     override var isSelected: Bool {
         didSet{
             if isSelected {
-                cheezeBackView.backgroundColor = UIColor.yellow
+                cheezeBackView.backgroundColor = UIColor.subYellow
+                cheezeText.textColor = .black
             }
             else {
                 cheezeBackView.backgroundColor = UIColor.white
+                cheezeText.textColor = .darkGray
             }
         }
     }
