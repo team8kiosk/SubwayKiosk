@@ -14,6 +14,8 @@
 		B63C17152BBADFC900CCA5B8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B63C17142BBADFC900CCA5B8 /* Assets.xcassets */; };
 		B63C17182BBADFC900CCA5B8 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = B63C17172BBADFC900CCA5B8 /* Base */; };
 		B6AA770D2BBD3F0D002E1852 /* OrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6AA770C2BBD3F0D002E1852 /* OrderTableViewCell.swift */; };
+		B6BD55942BC00D2D00249524 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6BD55932BC00D2D00249524 /* Order.swift */; };
+
 		CEA2DE382BBCF639009C5DC9 /* BreadCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2DE372BBCF639009C5DC9 /* BreadCollectionViewCell.swift */; };
 		CEA2DE3A2BBD046D009C5DC9 /* CheezeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA2DE392BBD046D009C5DC9 /* CheezeCollectionViewCell.swift */; };
 		CEEF61F52BBD6DA300C6C06D /* VegiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF61F42BBD6DA300C6C06D /* VegiCollectionViewCell.swift */; };
@@ -31,6 +33,9 @@
 		B63C17172BBADFC900CCA5B8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B63C17192BBADFC900CCA5B8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B6AA770C2BBD3F0D002E1852 /* OrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewCell.swift; sourceTree = "<group>"; };
+
+		B6BD55932BC00D2D00249524 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+
 		CEA2DE372BBCF639009C5DC9 /* BreadCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEA2DE392BBD046D009C5DC9 /* CheezeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheezeCollectionViewCell.swift; sourceTree = "<group>"; };
 		CEEF61F42BBD6DA300C6C06D /* VegiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VegiCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -70,17 +75,22 @@
 			children = (
 				B63C170B2BBADFC700CCA5B8 /* AppDelegate.swift */,
 				B63C170D2BBADFC700CCA5B8 /* SceneDelegate.swift */,
+				B6BD55932BC00D2D00249524 /* Order.swift */,
 				B63C170F2BBADFC700CCA5B8 /* ViewController.swift */,
+
 				B6AA770C2BBD3F0D002E1852 /* OrderTableViewCell.swift */,
+
+				F4729CCD2BBBB3A600BFDFD6 /* TabbarTopCollectionViewCell.swift */,
+
 				CEA2DE372BBCF639009C5DC9 /* BreadCollectionViewCell.swift */,
 				CEA2DE392BBD046D009C5DC9 /* CheezeCollectionViewCell.swift */,
 				CEEF61F42BBD6DA300C6C06D /* VegiCollectionViewCell.swift */,
 				CEEF61F62BBD6DBC00C6C06D /* SauceCollectionViewCell.swift */,
+
 				B63C17112BBADFC700CCA5B8 /* Main.storyboard */,
 				B63C17142BBADFC900CCA5B8 /* Assets.xcassets */,
 				B63C17162BBADFC900CCA5B8 /* LaunchScreen.storyboard */,
 				B63C17192BBADFC900CCA5B8 /* Info.plist */,
-				F4729CCD2BBBB3A600BFDFD6 /* TabbarTopCollectionViewCell.swift */,
 			);
 			path = SubwayKiosk;
 			sourceTree = "<group>";
@@ -160,6 +170,7 @@
 				CEEF61F72BBD6DBC00C6C06D /* SauceCollectionViewCell.swift in Sources */,
 				CEA2DE3A2BBD046D009C5DC9 /* CheezeCollectionViewCell.swift in Sources */,
 				CEA2DE382BBCF639009C5DC9 /* BreadCollectionViewCell.swift in Sources */,
+				B6BD55942BC00D2D00249524 /* Order.swift in Sources */,
 				CEEF61F52BBD6DA300C6C06D /* VegiCollectionViewCell.swift in Sources */,
 				B63C170C2BBADFC700CCA5B8 /* AppDelegate.swift in Sources */,
 				B6AA770D2BBD3F0D002E1852 /* OrderTableViewCell.swift in Sources */,
