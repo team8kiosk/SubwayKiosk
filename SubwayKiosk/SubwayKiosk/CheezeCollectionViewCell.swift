@@ -9,6 +9,13 @@
 import UIKit
 
 class CheezeCollectionViewCell: UICollectionViewCell {
+    let cheezeBackView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 20
+        return view
+    }()
+    
     let cheezeText: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -16,16 +23,35 @@ class CheezeCollectionViewCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    
+    override var isSelected: Bool {
+        didSet{
+            if isSelected {
+                cheezeBackView.backgroundColor = UIColor.yellow
+            }
+            else {
+                cheezeBackView.backgroundColor = UIColor.white
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        
-        self.addSubview(cheezeText)
-        translatesAutoresizingMaskIntoConstraints = false
+        addSubview(cheezeBackView)
+        cheezeBackView.addSubview(cheezeText)
         
         NSLayoutConstraint.activate([
-            cheezeText.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-            cheezeText.centerYAnchor.constraint(equalTo: self.centerYAnchor)
+                    cheezeBackView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+                    cheezeBackView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+                    cheezeBackView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+                    cheezeBackView.heightAnchor.constraint(equalTo: contentView.heightAnchor)
+                ])
+        
+        translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cheezeText.centerXAnchor.constraint(equalTo: cheezeBackView.centerXAnchor),
+            cheezeText.centerYAnchor.constraint(equalTo: cheezeBackView.centerYAnchor)
         ])
     }
     
@@ -33,3 +59,5 @@ class CheezeCollectionViewCell: UICollectionViewCell {
         super.init(coder: aDecoder)
     }
 }
+
+
