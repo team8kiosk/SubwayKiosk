@@ -390,6 +390,66 @@ class ViewController: UIViewController {
         order.size = sender.currentTitle == "15cm" ? .half : .whole
     }
     
+    lazy var oButton: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("O", for: .normal)
+        btn.backgroundColor = .clear
+        btn.setTitleColor(.systemBlue, for: .normal)
+        btn.layer.cornerRadius = 20
+        btn.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var xButton: UIButton = {
+        let btn2 = UIButton()
+        btn2.setTitle("X", for: .normal)
+        btn2.backgroundColor = .clear
+        btn2.setTitleColor(.systemBlue, for: .normal)
+        btn2.layer.cornerRadius = 20
+        btn2.addTarget(self, action: #selector(oxButtonTapped), for: .touchUpInside)
+        return btn2
+    }()
+    
+    @objc func oxButtonTapped (_ sender: UIButton) {
+        oButton.isSelected = false
+        xButton.isSelected = false
+        oButton.backgroundColor = .clear
+        xButton.backgroundColor = .clear
+        
+        sender.isSelected = true
+        sender.backgroundColor = .yellow
+    }
+    
+    lazy var _15Button: UIButton = {
+        let btn = UIButton()
+        btn.setTitle("15cm", for: .normal)
+        btn.backgroundColor = .clear
+        btn.setTitleColor(.systemBlue, for: .normal)
+        btn.layer.cornerRadius = 20
+        btn.addTarget(self, action: #selector(cmButtonTapped), for: .touchUpInside)
+        return btn
+    }()
+    
+    lazy var _30Button: UIButton = {
+        let btn2 = UIButton()
+        btn2.setTitle("30cm", for: .normal)
+        btn2.backgroundColor = .clear
+        btn2.setTitleColor(.systemBlue, for: .normal)
+        btn2.layer.cornerRadius = 20
+        btn2.addTarget(self, action: #selector(cmButtonTapped), for: .touchUpInside)
+        return btn2
+    }()
+    
+    @objc func cmButtonTapped (_ sender: UIButton) {
+        _15Button.isSelected = false
+        _30Button.isSelected = false
+        _15Button.backgroundColor = .clear
+        _30Button.backgroundColor = .clear
+        
+        sender.isSelected = true
+        sender.backgroundColor = .yellow
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -471,17 +531,19 @@ class ViewController: UIViewController {
         self.view.addSubview(vegiHorizontalBar)
         self.view.addSubview(sauceHorizontalBar)
         
-    
+
         breadHorizontalBar.delegate = self
         breadHorizontalBar.dataSource = self
         breadHorizontalBar.register(BreadCollectionViewCell.self, forCellWithReuseIdentifier: "BreadCollectionViewCell")
         NSLayoutConstraint.activate([
+
 
             breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
             breadHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
 
             //breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 14),
             //breadHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+
 
             breadHorizontalBar.leadingAnchor.constraint(equalTo: breadLabel.trailingAnchor, constant: 70),
             breadHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
@@ -527,15 +589,13 @@ class ViewController: UIViewController {
             sauceHorizontalBar.leadingAnchor.constraint(equalTo: sauceLabel.trailingAnchor, constant: 50),
             sauceHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
-        
+
         breadLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             breadLabel.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
-
             breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
 
             //breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
-
         ])
         
         cheezeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -564,7 +624,6 @@ class ViewController: UIViewController {
         ])
         sauceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-
             sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 40),
             sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
@@ -581,14 +640,17 @@ class ViewController: UIViewController {
        /*
             sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 20),
             sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+
         ])
         chooseLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -0),
-            chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+            chooseLabel.topAnchor.constraint(equalTo: sauceLabel.bottomAnchor, constant: 40),
+            chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
         chooseStackView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            chooseStackView.topAnchor.constraint(equalTo: sauceHorizontalBar.topAnchor, constant: 63),
+            chooseStackView.heightAnchor.constraint(equalToConstant: 17),
             chooseStackView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -0),
           */
 
@@ -604,7 +666,6 @@ class ViewController: UIViewController {
         ])
         
     }
-    
 }
 
 extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -686,6 +747,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource, 
             return CGSize(width: cellWidth, height: 18)
         }
     }
+
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
@@ -857,5 +919,4 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-
 
