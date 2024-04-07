@@ -126,7 +126,9 @@ class ViewController: UIViewController {
         button.backgroundColor = #colorLiteral(red: 1, green: 0.7588691115, blue: 0.04935026914, alpha: 1)
         button.setTitle("취소하기", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
+
         button.addTarget(self, action: #selector(initButtonTapped), for: .touchUpInside)
+        //button.addTarget(ViewController.self, action: #selector(cancelButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -181,7 +183,7 @@ class ViewController: UIViewController {
         button.backgroundColor = #colorLiteral(red: 0.1294117719, green: 0.2156862766, blue: 0.06666667014, alpha: 1)
         button.setTitle("결제하기", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 22)
-        button.addTarget(self, action: #selector(payButtonTapped), for: .touchUpInside)
+        button.addTarget(ViewController.self, action: #selector(payButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -396,7 +398,7 @@ class ViewController: UIViewController {
         view.addSubview(bottomView)
         setupTableView()
         setupLayout()
-        
+
         let breadLabel: UILabel = .init()
         breadLabel.text = "빵"
         breadLabel.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
@@ -474,8 +476,13 @@ class ViewController: UIViewController {
         breadHorizontalBar.dataSource = self
         breadHorizontalBar.register(BreadCollectionViewCell.self, forCellWithReuseIdentifier: "BreadCollectionViewCell")
         NSLayoutConstraint.activate([
+
             breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
             breadHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
+
+            //breadHorizontalBar.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 14),
+            //breadHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+
             breadHorizontalBar.leadingAnchor.constraint(equalTo: breadLabel.trailingAnchor, constant: 70),
             breadHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -510,17 +517,25 @@ class ViewController: UIViewController {
         sauceHorizontalBar.allowsMultipleSelection = true
         
         NSLayoutConstraint.activate([
+
             sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 45),
             sauceHorizontalBar.heightAnchor.constraint(equalToConstant: 17),
+
+            //sauceHorizontalBar.topAnchor.constraint(equalTo: vegiHorizontalBar.bottomAnchor, constant: 0),
+            //sauceHorizontalBar.heightAnchor.constraint(equalToConstant: 50),
+
             sauceHorizontalBar.leadingAnchor.constraint(equalTo: sauceLabel.trailingAnchor, constant: 50),
             sauceHorizontalBar.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         
-        
         breadLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             breadLabel.topAnchor.constraint(equalTo: tabbarTop.bottomAnchor, constant: 25),
+
             breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
+
+            //breadLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+
         ])
         
         cheezeLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -549,6 +564,7 @@ class ViewController: UIViewController {
         ])
         sauceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+
             sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 40),
             sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 40)
         ])
@@ -561,6 +577,21 @@ class ViewController: UIViewController {
         NSLayoutConstraint.activate([
             chooseStackView.topAnchor.constraint(equalTo: sauceHorizontalBar.topAnchor, constant: 63),
             chooseStackView.heightAnchor.constraint(equalToConstant: 17),
+
+       /*
+            sauceLabel.topAnchor.constraint(equalTo: vegiLabel.bottomAnchor, constant: 20),
+            sauceLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+        ])
+        chooseLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            chooseLabel.bottomAnchor.constraint(equalTo: cancelButton.topAnchor, constant: -0),
+            chooseLabel.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 50)
+        ])
+        chooseStackView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            chooseStackView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -0),
+          */
+
             chooseStackView.leadingAnchor.constraint(equalTo: chooseLabel.trailingAnchor, constant: 60),
             chooseStackView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 0)
         ])
@@ -826,4 +857,5 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
 

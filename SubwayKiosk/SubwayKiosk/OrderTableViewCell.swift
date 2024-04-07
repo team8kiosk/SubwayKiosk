@@ -72,6 +72,7 @@ class OrderTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+
     func setupLayout() {
         
         stackView.translatesAutoresizingMaskIntoConstraints = false
@@ -98,3 +99,4 @@ class OrderTableViewCell: UITableViewCell {
         stepperValueChanged?(newValue)
     }
 }
+
